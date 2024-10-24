@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-gray-900 antialiased overscroll-none;
+    touch-action: manipulation;
+  }
+
+  /* Prevent pull-to-refresh on mobile */
+  body {
+    overflow: hidden;
+  }
+}
+
+/* Custom scrollbar */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
+  }
+}
+
+/* Hide scrollbar on mobile */
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.ProseMirror {
+  > * + * {
+    margin-top: 0.75em;
+  }
+}
+
+/* Basic editor styles */
+.ProseMirror {
+  @apply text-gray-900;
+  
+  ul, ol {
+    padding: 0 1rem;
+  }
+
+  ul[data-type="taskList"] {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+
+      > label {
+        margin: 0.25rem 0;
+      }
+    }
+
+    input[type="checkbox"] {
+      @apply rounded border-gray-300 w-4 h-4;
+      @apply touch-manipulation;
+    }
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl font-bold;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl font-bold;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-bold;
+  }
+
+  code {
+    @apply bg-gray-100 text-gray-900 px-1.5 py-0.5 rounded font-mono text-sm;
+  }
+
+  blockquote {
+    @apply pl-4 border-l-4 border-gray-200 text-gray-600 italic;
+  }
+
+  mark {
+    @apply bg-yellow-200;
+  }
+}
